@@ -1,0 +1,100 @@
+package org.studyeasy;
+
+import java.util.Scanner;
+
+import static java.util.Optional.empty;
+
+// MINI PROJECT USING STACK ( STACK OPERATION CONSOLE APP )
+//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
+// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+public class StackApp {
+    public static void main(String[] args) {
+        CoustamStack stack = new CoustamStack(5);// stack size is 5
+        Scanner sc = new Scanner(System.in);
+        int operation;
+        do{
+            System.out.println("stack operation:");
+            System.out.println("1.push");
+            System.out.println("2.pop");
+            System.out.println("3.peek");
+            System.out.println("4.display");
+            System.out.println("5.exit");
+
+            System.out.println("choose a case: ");
+
+            operation = sc.nextInt();
+            switch(operation){
+                case 1:
+                    System.out.println("enter the element to be pushed:");
+                    int value = sc.nextInt();
+                    stack.push(value);
+                    break;
+                case 2:
+                  //  System.out.println("enter the element to be popped:");
+                    //int element = sc.nextInt();
+                    stack.pop();
+                    break;
+                case 3:
+                    stack.peek();
+                    break;
+                case 4:
+                    stack.display();
+                    break;
+                case 5:
+                    System.out.println("exit the program");
+                    break;
+            }
+        }while(operation != 5);
+        sc.close();
+    }
+}
+
+   class coustamStack {
+    private int[] arr;
+    private  int capacity;
+    private int top;
+
+    public coustamStack(int size){
+        arr = new int[size];
+        capacity = size;
+        top = -1;
+    }
+       public void push(int value){
+           if(top == capacity-1){
+               System.out.println("stack overflow");
+           }else {
+            arr[++top] = value;
+               System.out.println("stack pushed: " + value);
+        }
+        }
+        public int pop() {
+            if (isEmpty()) {
+                System.out.println("stack is empty");
+            } else {
+                System.out.println("stack popped: " + arr[top--]);
+            }
+     return arr[top];
+    }
+        public int peek() {
+            if (isEmpty()) {
+                System.out.println("stack is empty");
+            } else {
+                System.out.println("stack peeked: " + arr[top]);
+            }
+         return arr[top];  }
+        public boolean isEmpty() {
+            return top == -1;
+        }
+
+        public void display() {
+           if (isEmpty()) {
+               System.out.println("stack is empty");
+           }else {
+               System.out.println("stack value: ");
+            for (int i = top; i >= 0; i--) {
+                System.out.println(arr[i] + " ");
+            }
+                System.out.println();
+            }
+        }
+   }

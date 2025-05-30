@@ -1,0 +1,18 @@
+package org.studyeasy;
+
+public class CoustamStack {
+    public CoustamStack(int i) {
+    }
+
+    public void push(int value) {
+    }
+
+    public void pop() {
+    }
+
+    public void peek() {
+    }
+
+    public void display() {
+    }
+}
