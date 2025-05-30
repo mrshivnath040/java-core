@@ -1,0 +1,73 @@
+package org.studyeasy;
+
+   // GENERIC CALCULATOR APP
+
+ //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
+/*
+    Creating a generic Calculator that can perform
+    addition and comparison on Numbers (like integers, double, float etc..)
+    using bounded type parameters
+ */
+
+   // Generic Calculator class bounded type parameter
+
+class calculator<T extends Number> {      // genneric class
+    private T num1;
+    private T num2;
+
+
+    public calculator(T num1, T num2) {    // constructor
+        this.num1 = num1;
+        this.num2 = num2;
+    }
+
+    public int sum() {  // adding two values
+        return num1.intValue() + num2.intValue();
+    }
+
+    public int  sub() {   // subtracting two values
+        return num1.intValue() - num2.intValue();
+    }
+
+    public int div() {  // dividing two values
+        if (num2.intValue() != 0) {
+            return num1.intValue() / num2.intValue();
+        }
+
+    return 0;
+    }
+
+    public int multi() {  // multiplying two values
+        return num1.intValue() * num2.intValue();
+    }
+
+   public boolean compare() {
+        int n1 = num1.intValue();
+        int n2 = num2.intValue();
+        if (n1 > n2) {
+            System.out.println(n1 + " > " + n2);
+        }else if (n1 < n2) {
+            System.out.println(n1 + " < " + n2);
+        }
+
+       return  false ;
+   }
+
+
+
+    //public boolean compare() {
+       // return false;
+   // }
+}
+
+public class GenericCalculatorApp {
+    public static void main(String[] args) {
+        calculator<Integer> intcalc = new calculator<>(10,20);
+        System.out.println("Interger Calculator");
+        System.out.println("Sum: " + intcalc.sum());
+        System.out.println("Sub: " + intcalc.sub());
+        System.out.println("Div: " + intcalc.div());
+        System.out.println("Multi: " + intcalc.multi());
+       System.out.println(intcalc.compare());
+    }
+}
