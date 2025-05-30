@@ -1,0 +1,125 @@
+package org.studyeasy;
+
+//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
+// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+
+     // Bank ATM Simulation Using Multithreading
+
+import java.util.Scanner;
+
+class ATMSimulation {
+    private int balance = 4000;
+
+    synchronized void checkbalance(String name){   //synchronized block
+         System.out.println(name + " is checking balance...." );
+        try{
+            Thread.sleep(5000); //Time delay in ATM
+        }catch(InterruptedException e){
+            e.printStackTrace();
+        }
+        System.out.println(name + " Remaning balance is: " + balance  );
+
+    }
+
+    synchronized void deposit(String name, int amount){  //synchronized block for deposite
+        System.out.println("\n" + name + " is depositing amount is: "+ amount);
+        try{
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        balance += amount;
+        System.out.println(name + " deposited " + amount + " successfully ");
+
+    }
+
+    synchronized void withdraw(String name, int amount){    //  synchronized block for withdraw
+        System.out.println("\n" + name + " is trying to  withdraw "+ amount + " ... " );
+        try{
+            Thread.sleep(2000);
+        }catch(InterruptedException e){
+            e.printStackTrace();
+        }
+        if (balance >= amount) {
+            balance -= amount;
+            System.out.println(name + " Completed withdrawn " + amount + " successfully");
+        }else{
+            System.out.println(name + " Insufficient balance");
+        }
+    }
+}
+    // customer class
+class  Customer extends Thread {
+        ATMSimulation atm;
+        String name;
+
+        Customer(ATMSimulation atm, String name) {
+            this.atm = atm;
+            this.name = name;
+        }
+
+        @Override
+        public void run() {
+            Scanner sc = new Scanner(System.in);
+            int choice;
+
+            System.out.println();
+            do {
+                System.out.println("\nThe name of customer is: " + name);
+                System.out.println("What would you like to do?");
+                System.out.println("1. Check Balance");
+                System.out.println("2. Deposit");
+                System.out.println("3. Withdraw");
+                System.out.println("4. Exit");
+                System.out.println("Enter your choice : ");
+                choice = sc.nextInt();
+                sc.nextLine();
+
+                switch (choice) {
+                    case 1:
+                        System.out.println("Check balance...");
+                        atm.checkbalance(name);
+                        break;
+                    case 2:
+                        System.out.println("Deposit...");
+                        atm.deposit(name, 100);
+                        break;
+                    case 3:
+                        System.out.println("Withdraw...");
+                        atm.withdraw(name, 100);
+                        break;
+                    case 4:
+                        System.out.println("Exit...");
+                }
+            }
+            while (choice != 4);
+            sc.close();
+        /*atm.checkbalance(name);
+        atm.deposit(name, 500);
+        atm.withdraw(name, 3000);
+        atm.checkbalance(name);
+        }
+         */
+        }
+    }
+
+        class BankATM {
+            public static void main(String[] args) {
+                ATMSimulation atm = new ATMSimulation();
+              /*  Scanner sc = new Scanner(System.in);
+                int name = 01;
+                System.out.println(" your id is: " + name);
+
+
+                Customer c1 = new Customer(atm, "shivnath");
+
+                Customer c2 = new Customer(atm, "Dinesh");
+
+                Customer c3 = new Customer(atm, "Ganesh");
+               */
+                Customer c4 = new Customer(atm, "Varun");
+               // c1.start();
+                //c2.start();
+                 c4.start();
+            }
+        }
